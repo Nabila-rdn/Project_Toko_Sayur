@@ -1,15 +1,11 @@
-@extends('layouts.main')
+<a href="{{ url('/') }}">Menu Produk</a>
 
-@section('content')
-    <h1>Daftar Produk</h1>
+<h1>Daftar Produk</h1>
 
-    <ul>
-        @foreach ($produks as $produk)
-            <li>
-                <!-- Tautan juga wajib menggunakan helper route() -->
-                <a href="{{ route('produk.show', $produk['id']) }}">{{ $produk['nama'] }}</a>
-                — Rp{{ $produk['harga'] }}
-            </li>
-        @endforeach
-    </ul>
-@endsection
+<ul>
+    @forelse ($produks as $produk)
+        <li>{{ $produk->nama }} — Rp{{ $produk->harga }}</li>
+    @empty
+        <li>Belum ada data produk di database. Silakan jalankan seeder.</li>
+    @endforelse
+</ul>

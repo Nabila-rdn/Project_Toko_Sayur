@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('status_ketersediaan', ['tersedia','stok_menipis','habis'])->default('tersedia');
             $table->string('foto')->nullable();
             $table->text('deskripsi')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
 

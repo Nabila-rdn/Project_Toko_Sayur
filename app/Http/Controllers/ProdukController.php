@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Produk;
 use Illuminate\Http\Request;
 
 class ProdukController extends Controller
 {
     public function index()
     {
-        $produks = [
-        ['id' => 1, 'nama' => 'Kangkung', 'harga' => 3000],
-        ['id' => 2, 'nama' => 'Tomat', 'harga' => 7000],
-        ['id' => 3, 'nama' => 'Cabai', 'harga' => 15000],
-    ];
+        $produks = Produk::all();
 
-    return view('produk.index', ['produks' => $produks]);
-
+        return view('produk.index', ['produks' => $produks]);
     }
 
     public function create()

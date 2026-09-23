@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('jam_operasional', 100);
             $table->string('nomor_wa', 20);
             $table->text('deskripsi')->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

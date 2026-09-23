@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('diubah_oleh')->nullable()->constrained('users')->nullOnDelete();
             $table->decimal('harga_lama', 10, 2);
             $table->decimal('harga_baru', 10, 2);
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }
