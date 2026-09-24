@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin Utama',
             'email' => 'admin@tokosayur.test',
             'password' => Hash::make('password'),
-            'role' => 'admin', // Pastikan kolom role ada di migrasi tabel users milikmu
+            'role' => 'admin',
         ]);
 
         $sayur = Kategori::create(['nama' => 'Sayuran Hijau', 'slug' => 'sayuran-hijau']);
