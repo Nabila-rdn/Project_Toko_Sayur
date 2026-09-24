@@ -186,5 +186,5 @@ docs/                  → Dokumen rancangan
 | Nabila Rahmadiani | Basis data dan model |
 | Intan Safitri | Antarmuka dan komponen |
 | Nova Arundyna Inzani | Autentikasi dan otorisasi |
-| Ghea Putri Nashirah | Uji kebergunaan dan dokumentasi |
-| Rachel Inaya Allantama | Uji kebergunaan dan dokumentasi |
+| Ghea Putri Nashirah | Uji kebergunaan |
+| Rachel Inaya Allantama | Dokumentasi |
