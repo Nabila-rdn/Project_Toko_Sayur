@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProdukController extends Controller
 {
     public function index()
     {
-        $produks = Produk::all();
+        $produks = Produk::with(['kategori', 'satuan'])->get();
 
-        return view('produk.index', ['produks' => $produks]);
+        return Inertia::render('produk/index', [
+            'produks' => $produks,
+        ]);
     }
 
     public function create()
@@ -24,33 +27,25 @@ class ProdukController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Produk $produk)
     {
-        //
+        $produk->load(['kategori', 'satuan']);
+
+        return Inertia::render('produk/show', [
+            'produk' => $produk,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
