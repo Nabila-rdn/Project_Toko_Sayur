@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< Updated upstream
     "content-hash": "9afbf8bb04cc05f8e0505404903fe683",
-=======
-    "content-hash": "7140e363187926595d09a79bb94ed6dd",
->>>>>>> Stashed changes
     "packages": [
         {
             "name": "brick/math",
@@ -8427,5 +8423,5 @@
         "php": "^8.3"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }

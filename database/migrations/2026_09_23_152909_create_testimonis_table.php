@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -17,11 +16,9 @@ return new class extends Migration
             $table->foreignId('produk_id')->constrained('produks')->cascadeOnDelete();
             $table->string('nama_pelanggan', 100);
             $table->text('komentar');
-            $table->unsignedTinyInteger('rating')->default(5);
+            $table->unsignedTinyInteger('rating')->default(5)->check('rating BETWEEN 1 AND 5');
             $table->timestamps();
         });
-
-        DB::statement('ALTER TABLE testimonis ADD CONSTRAINT rating_valid CHECK (rating BETWEEN 1 AND 5)');
     }
 
     /**
