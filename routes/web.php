@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProdukController;
+use Inertia\Inertia;
 
 Route::get('/', function () {
-    return redirect()->route('produk.index');
+    return Inertia::render('home');
 });
 
 Route::resource('produk', ProdukController::class);
