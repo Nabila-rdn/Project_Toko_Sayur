@@ -10,44 +10,52 @@ class ProdukController extends Controller
 {
     public function index()
     {
-        $produks = Produk::with(['kategori', 'satuan'])->get();
-
-        return Inertia::render('produk/index', [
-            'produks' => $produks,
+        return Inertia::render('Produk/Index', [
+            'produks' => Produk::latest()->get(),
         ]);
     }
 
     public function create()
     {
-
+        return Inertia::render('Produk/Create');
     }
 
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'nama_produk' => 'required|string|max:255',
+            'harga'       => 'required|numeric|min:0',
+            'stok'        => 'required|integer|min:0',
+        ]);
 
+        Produk::create($validated);
+        return redirect()->route('produk.index')
+            ->with('sukses', 'Produk sayur berhasil ditambahkan!');
     }
 
-    public function show(Produk $produk)
+    public function edit(Produk $produk)
     {
-        $produk->load(['kategori', 'satuan']);
-
-        return Inertia::render('produk/show', [
+        return Inertia::render('Produk/Edit', [
             'produk' => $produk,
         ]);
     }
 
-    public function edit(string $id)
+    public function update(Request $request, Produk $produk)
     {
-        //
+        $validated = $request->validate([
+            'nama_produk' => 'required|string|max:255',
+            'harga'       => 'required|numeric|min:0',
+            'stok'        => 'required|integer|min:0',
+        ]);
+        $produk->update($validated);
+        return redirect()->route('produk.index')
+            ->with('sukses', 'Data produk berhasil diperbarui!');
     }
 
-    public function update(Request $request, string $id)
+    public function destroy(Produk $produk)
     {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
+        $produk->delete();
+        return redirect()->route('produk.index')
+            ->with('sukses', 'Produk berhasil dihapus!');
     }
 }
