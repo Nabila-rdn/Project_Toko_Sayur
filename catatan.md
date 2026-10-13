@@ -1,28 +1,26 @@
 # Catatan Tugas - Toko Sayur
 
 ## Pembagian Tugas Kelompok
-1. **[Nama Anggota 1] ([NPM])**
-   - Membuat komponen `PesanFlash.jsx` untuk menampilkan pesan keberhasilan.
-   - Membuat komponen `Kosong.jsx` untuk menampilkan keadaan ketika data produk belum tersedia.
+1. **Ghea Putri Nashirah**
+   - Membuat komponen Komponen Pesan Flash (resources/js/Components/PesanFlash.jsx)
 
-2. **[Nama Anggota 2] ([NPM])**
-   - Membuat halaman daftar produk pada `Index.jsx`.
-   - Menambahkan komponen pendukung, penggunaan `useState`, dan konfirmasi sebelum menghapus produk.
+2. **Intan Safitri**
+   - Membuat Komponen Keadaan Kosong (resources/js/Components/Kosong.jsx), Halaman Daftar Produk + Konfirmasi Hapus (resources/js/Pages/Produk/Index.jsx)
 
-3. **[Nama Anggota 3] ([NPM])**
-   - Membuat form tambah dan edit produk menggunakan `useForm`.
-   - Menambahkan validasi input dan tombol saat proses penyimpanan berlangsung.
+3. **Nova Arundyna Inzani**
+   - Membuat Form Tambah/Ubah Produk (resources/js/Pages/Produk/Create.jsx)
 
-4. **[Nama Anggota 4] ([NPM])**
-   - Mengembangkan `ProdukController.php` dan routing produk.
-   - Menangani proses tambah, tampil, edit, ubah, dan hapus data produk serta pesan flash.
+4. **Nabila Rahmadiani**
+   - Melengkapi Controller Backend (ProdukController.php)
+
+5. **Rachel Inaya Allantama**
+   - MembBuat Halaman Edit Produk (resources/js/Pages/Produk/Edit.jsx), catatan.md
 
 ## Teknologi yang Digunakan
 - Laravel
 - React
 - Inertia.js
-- Tailwind CSS
-- Database SQLite
+- Database PostgreSQL
 
 ## Fitur yang Dikerjakan
 - Menampilkan daftar produk sayur.
@@ -34,4 +32,3 @@
 
 ## Catatan
 Pengerjaan dilakukan secara berkelompok menggunakan satu repositori GitHub. Setiap anggota bertanggung jawab atas bagian yang telah dibagi dan melakukan integrasi kode ke dalam proyek utama.
-
