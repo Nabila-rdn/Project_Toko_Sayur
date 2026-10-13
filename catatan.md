@@ -14,7 +14,7 @@
    - Melengkapi Controller Backend (ProdukController.php)
 
 5. **Rachel Inaya Allantama**
-   - MembBuat Halaman Edit Produk (resources/js/Pages/Produk/Edit.jsx), catatan.md
+   - Membuat Halaman Edit Produk (resources/js/Pages/Produk/Edit.jsx), catatan.md
 
 ## Teknologi yang Digunakan
 - Laravel
