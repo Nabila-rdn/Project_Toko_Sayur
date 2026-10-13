@@ -97,7 +97,6 @@ class ProdukController extends Controller
         ) {
             $slug = $dasar . '-' . $urutan++;
         }
-
         return $slug;
     }
 
