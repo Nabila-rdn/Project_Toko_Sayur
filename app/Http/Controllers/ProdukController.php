@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProdukRequest;
+use App\Http\Requests\UpdateProdukRequest;
 use App\Models\Kategori;
 use App\Models\Produk;
 use App\Models\Satuan;
@@ -11,42 +13,63 @@ use Inertia\Inertia;
 
 class ProdukController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $this->authorize('viewAny', Produk::class);
+        $user = $request->user();
+
+        $produks = Produk::with(['kategori', 'satuan'])->latest()->get()
+            ->each(fn (Produk $p) => $p->setAttribute('can', [
+                'update' => $user->can('update', $p),
+                'delete' => $user->can('delete', $p),
+            ]));
+
         return Inertia::render('produk/index', [
-            'produks' => Produk::with(['kategori', 'satuan'])->latest()->get(),
+            'produks' => $produks,
+            'can'     => ['create' => $user->can('create', Produk::class)],
         ]);
     }
 
     public function create()
     {
+        $this->authorize('create', Produk::class);
+
         return Inertia::render('produk/create', [
             'kategoris' => Kategori::orderBy('nama')->get(),
             'satuans'   => Satuan::orderBy('nama')->get(),
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreProdukRequest $request)
     {
-        $validated = $this->validasi($request);
+        $validated = $request->validated();
         $validated['slug'] = $this->buatSlug($validated['nama']);
         $validated['status_ketersediaan'] = $this->tentukanStatus($validated['stok']);
 
         Produk::create($validated);
+
         return redirect()->route('produk.index')
             ->with('sukses', 'Produk sayur berhasil ditambahkan!');
     }
 
-    public function show(Produk $produk)
+    public function show(Request $request, Produk $produk)
     {
+        $this->authorize('view', $produk);
         $produk->load(['kategori', 'satuan']);
+
         return Inertia::render('produk/show', [
             'produk' => $produk,
+            'can'    => [
+                'update' => $request->user()->can('update', $produk),
+                'delete' => $request->user()->can('delete', $produk),
+            ],
         ]);
     }
 
     public function edit(Produk $produk)
     {
+        $this->authorize('update', $produk);
+
         return Inertia::render('produk/edit', [
             'produk'    => $produk,
             'kategoris' => Kategori::orderBy('nama')->get(),
@@ -54,34 +77,25 @@ class ProdukController extends Controller
         ]);
     }
 
-    public function update(Request $request, Produk $produk)
+    public function update(UpdateProdukRequest $request, Produk $produk)
     {
-        $validated = $this->validasi($request);
+        $validated = $request->validated();
         $validated['slug'] = $this->buatSlug($validated['nama'], $produk->id);
         $validated['status_ketersediaan'] = $this->tentukanStatus($validated['stok']);
 
         $produk->update($validated);
+
         return redirect()->route('produk.index')
             ->with('sukses', 'Data produk berhasil diperbarui!');
     }
 
     public function destroy(Produk $produk)
     {
+        $this->authorize('delete', $produk);
         $produk->delete();
+
         return redirect()->route('produk.index')
             ->with('sukses', 'Produk berhasil dihapus!');
-    }
-
-    private function validasi(Request $request): array
-    {
-        return $request->validate([
-            'kategori_id' => 'required|exists:kategoris,id',
-            'satuan_id'   => 'nullable|exists:satuans,id',
-            'nama'        => 'required|string|max:150',
-            'harga'       => 'required|numeric|min:0',
-            'stok'        => 'required|integer|min:0',
-            'deskripsi'   => 'nullable|string',
-        ]);
     }
 
     private function buatSlug(string $nama, ?int $abaikanId = null): string
