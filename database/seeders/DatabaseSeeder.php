@@ -2,41 +2,38 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\Kategori;
-use App\Models\Satuan;
-use App\Models\Produk;
 use App\Models\ProfilToko;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         User::create([
-            'name' => 'Admin Utama',
-            'email' => 'admin@tokosayur.test',
-            'password' => Hash::make('password'),
-            'role' => 'admin',
+            'name'     => 'Admin Utama',
+            'email'    => 'admin@tokosayur.test',
+            'password' => 'password',
+            'role'     => 'admin',
         ]);
 
-        $sayur = Kategori::create(['nama' => 'Sayuran Hijau', 'slug' => 'sayuran-hijau']);
-        $kg = Satuan::create(['nama' => 'kg']);
+        User::create([
+            'name'     => 'Pemilik Toko',
+            'email'    => 'pemilik@tokosayur.test',
+            'password' => 'password',
+            'role'     => 'pemilik',
+        ]);
 
-        Produk::factory(10)->create(['kategori_id' => $sayur->id, 'satuan_id' => $kg->id]);
+        $this->call([
+            KategoriSeeder::class,
+            ProdukSeeder::class,
+        ]);
 
         ProfilToko::create([
-            'nama_toko' => 'Toko Sayur Segar',
-            'alamat' => 'Jl. Contoh No. 1',
+            'nama_toko'       => 'Toko Sayur Segar',
+            'alamat'          => 'Jl. Contoh No. 1',
             'jam_operasional' => '06.00 - 17.00 WIB',
-            'nomor_wa' => '62812xxxxxxx',
+            'nomor_wa'        => '62812xxxxxxx',
         ]);
     }
 }
