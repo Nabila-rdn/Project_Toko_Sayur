@@ -2,16 +2,21 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Kategori;
+use App\Models\Satuan;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class KategoriSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        //
+        foreach (['Sayuran Hijau', 'Sayuran Umbi', 'Sayuran Buah', 'Bumbu Dapur'] as $nama) {
+            Kategori::create(['nama' => $nama, 'slug' => Str::slug($nama)]);
+        }
+
+        foreach (['kg', 'ikat', 'pcs'] as $nama) {
+            Satuan::create(['nama' => $nama]);
+        }
     }
 }
