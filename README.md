@@ -6,10 +6,9 @@ Website company profile toko sayur yang menampilkan katalog, harga, dan ketersed
 
 | Komponen | Teknologi |
 |---|---|
-| Backend | Laravel 11 (PHP >= 8.1) |
+| Backend | Laravel 13 (PHP >= 8.1) |
 | Frontend | React (via Inertia.js) |
 | Styling | Tailwind CSS |
-| Autentikasi | Laravel Breeze |
 | Basis Data | PostgreSQL |
 
 ## Struktur Basis Data
@@ -149,6 +148,7 @@ Akses di `http://127.0.0.1:8000`.
 | Email | Password |
 |---|---|
 | admin@tokosayur.test | password |
+pemilik@tokosayur.test / password
 
 > Segera ganti password ini setelah login pertama kali, terutama sebelum dipakai untuk demo/presentasi ke pengguna nyata.
 
