@@ -1,5 +1,8 @@
-import { Head, Link, useForm } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
+import AppLayout from '@/Layouts/AppLayout';
+import HeaderHalaman from '@/Components/HeaderHalaman';
 import FormProduk from '@/Components/FormProduk';
+import PratinjauProduk from '@/Components/PratinjauProduk';
 
 export default function Create({ kategoris, satuans }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -17,25 +20,31 @@ export default function Create({ kategoris, satuans }) {
     }
 
     return (
-        <div className="p-6 max-w-lg mx-auto bg-white rounded border my-8">
+        <AppLayout lebar="max-w-5xl">
             <Head title="Tambah Produk" />
 
-            <Link href="/produk" className="text-blue-600 hover:underline text-sm">
-                &larr; Kembali ke Daftar Produk
-            </Link>
-            <h1 className="text-xl font-bold my-4">Tambah Produk Sayur</h1>
-
-            <FormProduk
-                data={data}
-                setData={setData}
-                errors={errors}
-                processing={processing}
-                kategoris={kategoris}
-                satuans={satuans}
-                onSubmit={handleSubmit}
-                labelTombol="Simpan Produk"
-                labelProses="Menyimpan..."
+            <HeaderHalaman
+                posisi={[{ label: 'Beranda', href: '/' }, { label: 'Produk', href: '/produk' }, { label: 'Tambah produk' }]}
+                judul="Tambah produk"
+                deskripsi="Isi data sayur yang baru datang. Setelah disimpan, kamu kembali ke daftar produk."
             />
-        </div>
+
+            <div className="grid gap-6 lg:grid-cols-3">
+                <div className="kartu p-6 lg:col-span-2">
+                    <FormProduk
+                        data={data}
+                        setData={setData}
+                        errors={errors}
+                        processing={processing}
+                        kategoris={kategoris}
+                        satuans={satuans}
+                        onSubmit={handleSubmit}
+                        labelTombol="Simpan produk"
+                        labelProses="Menyimpan..."
+                    />
+                </div>
+                <PratinjauProduk data={data} kategoris={kategoris} satuans={satuans} />
+            </div>
+        </AppLayout>
     );
 }
