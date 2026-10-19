@@ -24,6 +24,16 @@ class Produk extends Model
         return $this->belongsTo(Kategori::class);
     }
 
+    public function riwayatHargas()
+    {
+    return $this->hasMany(RiwayatHarga::class);
+    }
+
+    public function testimonis()
+    {
+    return $this->hasMany(Testimoni::class);
+    }
+
     public function satuan()
     {
         return $this->belongsTo(Satuan::class);
